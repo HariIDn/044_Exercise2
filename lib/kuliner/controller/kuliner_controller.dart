@@ -14,7 +14,7 @@ class KulinerController {
       'alamat': culinary.alamat,
     };
     try {
-      var response = await KulinerService.addCulinary(data, file);
+      var response = await kulinerservice.addCulinary(data, file);
 
       if (response.statusCode == 201) {
         return {'success': true, 'message': 'Data berhasil disimpan,'};
@@ -36,12 +36,12 @@ class KulinerController {
     return await addCulinary(culinary, file);
   }
 
-  Future<List<Kuliner>> getPeople() async {
+  Future<List<Kuliner>> getPlace() async {
     try {
-      List<dynamic> peopleData = await kulinerservice.fetchCulinary();
-      List<Kuliner> people =
-          peopleData.map((json) => Kuliner.fromMap(json)).toList();
-      return people;
+      List<dynamic> placeData = await kulinerservice.fetchCulinary();
+      List<Kuliner> place =
+          placeData.map((json) => Kuliner.fromMap(json)).toList();
+      return place;
     } catch (e) {
       print(e);
       throw Exception("Gagal mengambil data");

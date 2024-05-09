@@ -16,17 +16,17 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    _controller.getPeople();
+    _controller.getPlace();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Daftar Kontak'),
+        title: Text('Daftar Tempat'),
       ),
       body: FutureBuilder(
-        future: _controller.getPeople(),
+        future: _controller.getPlace(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
@@ -40,12 +40,12 @@ class _HomeViewState extends State<HomeView> {
             return ListView.builder(
               itemCount: snapshot.data?.length ?? 0,
               itemBuilder: (context, index) {
-                Kuliner person = snapshot.data![index];
+                Kuliner place = snapshot.data![index];
                 return ListTile(
-                  title: Text(person.nama_tempat),
-                  subtitle: Text(person.kuliner),
+                  title: Text(place.nama_tempat),
+                  subtitle: Text(place.kuliner),
                   leading: CircleAvatar(
-                    backgroundImage: NetworkImage(person.foto),
+                    backgroundImage: NetworkImage(place.foto),
                   ),
                 );
               },
