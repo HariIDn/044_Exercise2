@@ -23,6 +23,7 @@ class _FormUIState extends State<FormUI> {
   File? _image;
   final _imagePicker = ImagePicker();
   String? _alamat;
+  get _id => null;
   Future<void> getImage() async {
     final XFile? pickedFile =
         await _imagePicker.pickImage(source: ImageSource.gallery);
@@ -123,6 +124,7 @@ class _FormUIState extends State<FormUI> {
                 if (_formKey.currentState!.validate()) {
                   var result = await KulinerController().addCulinary(
                     Kuliner(
+                      id: _id,
                       nama_tempat: etNama.text,
                       kuliner: etKuliner.text,
                       alamat: etAlamat.text,

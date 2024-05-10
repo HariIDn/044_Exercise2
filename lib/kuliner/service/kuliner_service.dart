@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class KulinerService {
-  final String baseUrl = 'http://10.0.2.2/flutterdb/';
+  final String baseUrl = 'http://10.0.2.2/dbapi/';
   final String endpoint = 'db.php';
 
   Uri getUri(String path) {
@@ -21,9 +21,9 @@ class KulinerService {
       ..headers['Content-Type'] = 'application/json';
 
     if (file != null) {
-      request.files.add(await http.MultipartFile.fromPath('gambar', file.path));
+      request.files.add(await http.MultipartFile.fromPath('foto', file.path));
     } else {
-      request.files.add(http.MultipartFile.fromString('gambar', ''));
+      request.files.add(http.MultipartFile.fromString('foto', ''));
     }
 
     return await http.Response.fromStream(await request.send());
@@ -40,7 +40,7 @@ class KulinerService {
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> decodeResponse = json.decode(response.body);
-      return decodeResponse['culinary'];
+      return decodeResponse['db.php'];
     } else {
       throw Exception('Failed to load culinary: ${response.reasonPhrase}');
     }
