@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class KulinerService {
-  final String baseUrl = '';
-  final String endpoint = '';
+  final String baseUrl = 'http://10.0.2.2/flutterdb/';
+  final String endpoint = 'db.php';
 
   Uri getUri(String path) {
     return Uri.parse("$baseUrl$path");
@@ -40,9 +40,9 @@ class KulinerService {
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> decodeResponse = json.decode(response.body);
-      return decodeResponse['people'];
+      return decodeResponse['culinary'];
     } else {
-      throw Exception('Failed to load people: ${response.reasonPhrase}');
+      throw Exception('Failed to load culinary: ${response.reasonPhrase}');
     }
   }
 }

@@ -6,7 +6,7 @@ class FormHead extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Center(child: Text('Form Registration')),
+      title: Center(child: Text('Tambah Tempat')),
     );
   }
 }
