@@ -56,7 +56,7 @@ class KulinerService {
       ..headers['Content-Type'] = 'multipart/form-data';
 
     if (file != null) {
-      request.files.add(await http.MultipartFile.fromPath('gambar', file.path));
+      request.files.add(await http.MultipartFile.fromPath('foto', file.path));
     }
 
     return await http.Response.fromStream(await request.send());

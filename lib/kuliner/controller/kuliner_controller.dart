@@ -51,7 +51,7 @@ class KulinerController {
   Future<Map<String, dynamic>> editKuliner(
       Kuliner kuliner, File? file, String id) async {
     Map<String, String> data = {
-      'nmTempat': kuliner.nama_tempat,
+      'nama_tempat': kuliner.nama_tempat,
       'alamat': kuliner.alamat,
     };
 
