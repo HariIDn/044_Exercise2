@@ -45,4 +45,24 @@ class KulinerService {
       throw Exception('Failed to load culinary: ${response.reasonPhrase}');
     }
   }
+
+  Future<http.Response> editCulinary(
+      Map<String, String> data, File? file, String id) async {
+    var request = http.MultipartRequest(
+      'PUT',
+      getUri('$endpoint/$id'),
+    )
+      ..fields.addAll(data)
+      ..headers['Content-Type'] = 'multipart/form-data';
+
+    if (file != null) {
+      request.files.add(await http.MultipartFile.fromPath('gambar', file.path));
+    }
+
+    return await http.Response.fromStream(await request.send());
+  }
+
+  Future<http.Response> deleteKuliner(String id) async {
+    return await http.delete(getUri('$endpoint/$id'));
+  }
 }
