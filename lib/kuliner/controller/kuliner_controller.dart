@@ -47,4 +47,76 @@ class KulinerController {
       throw Exception("Gagal mengambil data");
     }
   }
+
+  Future<Map<String, dynamic>> editKuliner(
+      Kuliner kuliner, File? file, String id) async {
+    Map<String, String> data = {
+      'nmTempat': kuliner.nama_tempat,
+      'alamat': kuliner.alamat,
+    };
+
+    try {
+      var response = await kulinerservice.editCulinary(data, file, id);
+
+      if (response.statusCode == 200) {
+        return {
+          'success': true,
+          'message': 'Data berhasil diubah',
+        };
+      } else {
+        if (response.headers['content-type']!.contains('application/json')) {
+          var decodedJson = jsonDecode(response.body);
+          return {
+            'success': false,
+            'message': decodedJson['message'] ?? 'Terjadi Kesalahan',
+          };
+        }
+
+        var decodedJson = jsonDecode(response.body);
+        return {
+          'success': false,
+          'message':
+              decodedJson['message'] ?? 'Terjadi Kesalahan saat mengubah data',
+        };
+      }
+    } catch (e) {
+      return {
+        'success': false,
+        'message': 'Terjadi kesalahan: $e',
+      };
+    }
+  }
+
+  Future<Map<String, dynamic>> deleteKuliner(String id) async {
+    try {
+      var response = await kulinerservice.deleteCulinary(id);
+
+      if (response.statusCode == 200) {
+        return {
+          'success': true,
+          'message': 'Data berhasil dihapus',
+        };
+      } else {
+        if (response.headers['content-type']!.contains('application/json')) {
+          var decodedJson = jsonDecode(response.body);
+          return {
+            'success': false,
+            'message': decodedJson['message'] ?? 'Terjadi Kesalahan',
+          };
+        }
+
+        var decodedJson = jsonDecode(response.body);
+        return {
+          'success': false,
+          'message':
+              decodedJson['message'] ?? 'Terjadi Kesalahan saat menghapus data',
+        };
+      }
+    } catch (e) {
+      return {
+        'success': false,
+        'message': 'Terjadi kesalahan: $e',
+      };
+    }
+  }
 }
