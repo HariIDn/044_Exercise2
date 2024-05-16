@@ -62,7 +62,7 @@ class KulinerService {
     return await http.Response.fromStream(await request.send());
   }
 
-  Future<http.Response> deleteKuliner(String id) async {
+  Future<http.Response> deleteCulinary(String id) async {
     return await http.delete(getUri('$endpoint/$id'));
   }
 }
